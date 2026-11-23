@@ -1,0 +1,99 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp1
+{
+
+    // задание 1
+
+    /*internal class Program
+    {
+        static void SwapWithoutRef(int a, int b)
+        {
+            int temp = a;
+            a = b;
+            b = temp;
+            Console.WriteLine($"Внутри SwapWithoutRef: a = {a}, b = {b}");
+        }
+        static void SwapWithRef(ref int a, ref int b)
+        {
+            int temp = a;
+            a = b;
+            b = temp;
+            Console.WriteLine($"Внутри SwapWithRef: a = {a}, b = {b}");
+        }
+
+        static void Main(string[] args)
+        {
+            int x = 5;
+            int y = 10;
+
+            Console.WriteLine($"Исходные значения: x = {x}, y = {y}");
+            SwapWithoutRef(x, y);
+            Console.WriteLine($"После SwapWithoutRef: x = {x}, y = {y}");
+            Console.WriteLine();
+            SwapWithRef(ref x, ref y);
+            Console.WriteLine($"После SwapWithRef: x = {x}, y = {y}");
+        }
+    }*/
+
+    // задание 2
+
+    public class Person
+    {
+        public string Name { get; set; }
+        public int Age { get; set; }
+        public Person(string name, int age)
+        {
+            Name = name;
+            Age = age;
+        }
+        public override string ToString()
+        {
+            return $"Name: {Name}, Age: {Age}";
+        }
+    }
+    public class Program
+    {
+        public static void ResetPersonWithoutRef(Person person)
+        {
+            person = null;
+            Console.WriteLine("Внутри ResetPersonWithoutRef: person установлен в null.");
+        }
+        public static void ResetPersonWithRef(ref Person person)
+        {
+            person = null;
+            Console.WriteLine("Внутри ResetPersonWithRef: person установлен в null.");
+        }
+        public static void Main()
+        {
+            var person1 = new Person("Алексей", 30);
+            var person2 = new Person("Мария", 25);
+            Console.WriteLine("Исходные данные:");
+            Console.WriteLine(person1);
+            Console.WriteLine(person2);
+            Console.WriteLine("\n--- Попытка сброса БЕЗ ref ---");
+            ResetPersonWithoutRef(person1);
+            if (person1 != null)
+                Console.WriteLine($"person1 не null: {person1}");
+            else
+                Console.WriteLine("person1 is null");
+            Console.WriteLine("\n--- Попытка сброса С ref ---");
+            ResetPersonWithRef(ref person2);
+            if (person2 == null)
+                Console.WriteLine("person2 is null : Name: null, Age: null;");
+            else
+                Console.WriteLine($"person2 не null: {person2}");
+            Console.WriteLine("\n--- Изменение состояния объекта (без ref) ---");
+            ChangePersonName(person1, "Петр");
+            Console.WriteLine(person1);
+        }
+        public static void ChangePersonName(Person person, string newName)
+        {
+            person.Name = newName;
+        }
+    }
+}
